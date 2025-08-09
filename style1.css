@@ -1,0 +1,275 @@
+/* Import Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #19a3ff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+nav {
+  background-color: #6a08fe;
+  padding: 10px 0;
+}
+
+nav h1 {
+  text-align: center;
+  color: white;
+  font-size: 1.8rem;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 10px;
+  flex-wrap: wrap; /* allow wrapping for smaller screens */
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #fb774b;
+}
+
+section {
+  padding: 20px 0;
+}
+
+section h2 {
+  font-size: 2rem;
+  color: #6a08fe;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+section h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form input,
+form select,
+form button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  background-color: #6a08fe;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #fb774b;
+}
+
+/* About Section */
+.about {
+  background-color: #dcdada;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2rem;
+  color: #6a08fe;
+  margin-bottom: 20px;
+}
+
+.about p {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.container > h1 {
+  color: rgb(21, 255, 8);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .about {
+    padding: 30px 15px;
+  }
+
+  .about h2 {
+    font-size: 1.8rem;
+  }
+
+  .about p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about h2 {
+    font-size: 1.5rem;
+  }
+
+  .about p {
+    font-size: 0.9rem;
+  }
+}
+
+
+ul {
+  list-style: none;
+  margin-top: 15px;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+ul li:hover {
+  box-shadow: 2px 2px 2px 2px blue;
+}
+
+footer {
+  background-color: #6a08fe;
+  color: white;
+  padding: 30px 0;
+}
+
+footer h2,
+footer h3 {
+  color: white;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-about,
+.footer-contact {
+  max-width: 300px;
+}
+
+.footer-contact p {
+  margin: 5px 0;
+}
+
+.footer-contact i {
+  margin-right: 5px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #fb774b;
+}
+
+/* ----------------- RESPONSIVENESS ----------------- */
+
+/* For tablets (768px and below) */
+@media (max-width: 768px) {
+  nav h1 {
+    font-size: 1.2rem; /* smaller heading */
+  }
+
+  .nav-links {
+    flex-direction: row; /* keep in a row */
+    gap: 10px; /* small space between items */
+  }
+
+  .nav-links li {
+    margin: 4px 2px; /* reduced margin */
+    font-size: 0.9rem; /* smaller text */
+  }
+
+  .footer-container {
+    flex-direction: row; /* keep in a row */
+    flex-wrap: wrap; /* allow wrapping if needed */
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+
+/* For mobile devices (480px and below) */
+@media (max-width: 480px) {
+  nav h1 {
+    font-size: 1.3rem;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  section h3 {
+    font-size: 1.2rem;
+  }
+
+  form {
+    gap: 10px;
+  }
+
+  footer {
+    padding: 20px 0;
+  }
+
+  .footer-about,
+  .footer-contact {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./hospital management system.sql" />
+    <link rel="stylesheet" href="./style1.css" />
+    <title>Hospital Management System</title>
+    <style>
+      ul li{
+        display: flex;
+        justify-content: space-around;
+        color: rgb(0, 0, 0);
+      }
+      ul li button{
+        color: rgb(255, 255, 255);
+        background-color: rgb(62, 62, 255);
+        padding: 10px;
+        border-radius: 25px;
+        cursor: pointer;
+      }
+      h3{
+        margin-top: 20px;
+        text-align: center;
+        cursor: pointer;
+      }
+      button:hover{
+        background-color: blue;
+      }
+      .container>h1{
+        color: rgb(21, 255, 8);
+      }
+    </style>
+
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <h1 >
+          Hospital Management
+        </h1>
+        <ul class="nav-links">
+          <li><a href="./home.html">Home</a></li>
+          <li><a href="./index.html">Register</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Patient Management -->
+    <section id="patients">
+      <h2>Manage Patients</h2>
+      <h3>Add Patients</h3>
+      <form id="addPatientForm">
+        <input type="text" id="patientName" placeholder="Name" required />
+        <input type="number" id="patientAge" placeholder="Age" required />
+        <select name="Gender" id="patientGender" required>
+          <option value="Select your gender">Select your Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="patientContact" placeholder="Contact" required />
+        <input type="text" id="patientAddress" placeholder="Address" required />
+        <button type="submit">Add Patient</button>
+      </form>
+      <h3 id="showPatientList">Patients List</h3>
+      <ul id="patientList"></ul>
+    </section>
+    <hr>
+
+
+    <!-- Doctor Management -->
+    <section id="doctors">
+      <h2>Manage Doctors</h2>
+      <h3>Add Doctor</h3>
+      <form id="addDoctorForm">
+        <input type="text" id="doctorName" placeholder="Name" required />
+        <input
+          type="text"
+          id="doctorSpecialization"
+          placeholder="Specialization"
+          required
+        />
+        <input type="text" id="doctorContact" placeholder="Contact" required />
+        <button type="submit">Add Doctor</button>
+      </form>
+      <h3 id="showDoctorList">Doctors List</h3>
+      <ul id="doctorList"></ul>
+    </section>
+    <hr>
+
+    <!-- Appointment Management -->
+    <section id="appointments">
+      <h2>Manage Appointments</h2>
+      <h3>Add Appointment</h3>
+      <form id="addAppointmentForm">
+        <input
+          type="text"
+          id="appointmentPatientName"
+          placeholder="Patient Name"
+          required
+        />
+        <input
+          type="number"
+          id="appointmentDoctorId"
+          placeholder="Doctor ID"
+          required
+        />
+        <input type="date" id="appointmentDate" required />
+        <input type="time" id="appointmentTime" required />
+        <button type="submit">Add Appointment</button>
+      </form>
+      <h3 id="showAppointmentList">Appointments List</h3>
+      <ul id="appointmentList"></ul>
+    </section>
+    <hr>
+
+    <!-- BIlling Management -->
+    <section id="billing">
+        <h2>Manage Billing</h2>
+        <h3>Add Billing</h3>
+        <form id="addbillingForm">
+            <input type="number" id="billingPatientId" placeholder="Patient Id" required>
+            <input type="number" id="billingDoctorId" placeholder="Doctor ID" required>
+            <input type="number" id="billingAmount" required>
+            <input type="date" id="billingDate" required>
+            <button type="submit">Add Billing</button>
+        </form>
+        <h3 id="showbillingList">Billing List</h3>
+        <ul id="billingList"></ul>
+    </section>
+    <hr>
+
+    <section class="about" id="about">
+        <div class="container">
+          <h2>About Us</h2>
+          <p>
+            Our hospital has been serving the community for over 30 years with
+            world-class medical services, advanced technologies, and a
+            compassionate approach to patient care.
+          </p>
+        </div>
+      </section>
+
+    <footer id="contact">
+      <div class="container footer-container">
+        <div class="footer-about">
+          <h3>About Hospital</h3>
+          <p>
+            We provide comprehensive healthcare services with cutting-edge
+            technology and a compassionate team of professionals.
+          </p>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+          <p><i class="fas fa-envelope"></i> info@hospital.com</p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> 123 Health St, Wellness City,
+            USA
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Hospital Management System. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Similar sections for Staff, Medical Records, Prescriptions, Billing -->
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+
