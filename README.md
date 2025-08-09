@@ -14,7 +14,7 @@ This system helps manage patient records, doctor schedules, appointments, and bi
 ## 🛠 Tech Stack
 **Frontend:** HTML, Tailwind CSS, JavaScript  
 **Backend:** Node.js, Express.js  
-**Database:** MongoDB  
+**Database:** SQL  
 **Authentication:** JWT (JSON Web Tokens)
 
 ## 📂 Project Structure
