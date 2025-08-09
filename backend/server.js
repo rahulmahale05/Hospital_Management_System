@@ -104,16 +104,13 @@ app.post('/billing', (req, res) => {
     const query = 'INSERT INTO billing (patient_id, doctor_id, amount, date) VALUES (?, ?, ?, ?)';
     db.query(query, [patient_id, doctor_id, amount, date], (err, result) => {
         if (err) return res.status(500).send(err);
-        res.json({ message: 'bill added', billingId: result.insertId });
+        res.json({ message: 'Bill added', billingId: result.insertId });
     });
 });
 
-// Get all appointments
+// Get all billing records
 app.get('/billing', (req, res) => {
-    const query = `SELECT billing.*, patients.name AS patient_name, doctors.name AS doctor_name
-                   FROM billing
-                   JOIN patients ON billing.patient_id = patients.id
-                   JOIN doctors ON .doctor_id = doctors.id`;
+    const query = 'SELECT * FROM billing';
     db.query(query, (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);
@@ -163,9 +160,6 @@ app.delete('/deleteappointment/:id', (req, res) => {
     const appointmentId = req.params.id;
     console.log(appointmentId);
     
-
-    // Delete operation in the database (pseudo-code)
-    // Replace this with actual database code
     const sql = `DELETE FROM appointments WHERE id = ?`;
 
     db.query(sql, [appointmentId], (err, result) => {
@@ -174,7 +168,18 @@ app.delete('/deleteappointment/:id', (req, res) => {
         }
         res.send('Appointment deleted successfully');
     });
-}); 
+});
+
+// Delete a billing record
+app.delete('/billing/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'DELETE FROM billing WHERE id = ?';
+    db.query(query, [id], (err, result) => {
+        if (err) return res.status(500).send(err);
+        res.json({ message: 'Billing record deleted successfully' });
+    });
+});
+
 
 
 // Start the server

@@ -21,9 +21,9 @@ document.getElementById('addPatientForm').addEventListener('submit', async funct
 
    console.log(a.ok);
     if(a.ok === true){
-        alert("Patient Added Successfully!!!")
+        alert("Patient details Added Successfully!!!")
     }else{
-        alert("Failed to Add the Patient")
+        alert("Failed to Add the Patient details")
     }
     
 
@@ -74,11 +74,18 @@ document.getElementById('addDoctorForm').addEventListener('submit', async functi
     const specialization = document.getElementById('doctorSpecialization').value;
     const contact = document.getElementById('doctorContact').value;
 
-    await fetch('http://localhost:4000/doctors', {
+    let a = await fetch('http://localhost:4000/doctors', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, specialization, contact })
     });
+
+    if(a.ok === true){
+        alert("Doctor details Added Successfully!!!")
+    }else{
+        alert("Failed to Add the Doctor details")
+    }
+
     document.getElementById('addDoctorForm').reset()
     return
 });
@@ -128,11 +135,17 @@ document.getElementById('addAppointmentForm').addEventListener('submit', async f
     const appointment_date = document.getElementById('appointmentDate').value;
     const appointment_time = document.getElementById('appointmentTime').value;
 
-    await fetch('http://localhost:4000/appointments', {
+    let a = await fetch('http://localhost:4000/appointments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ patient_name, doctor_id, appointment_date, appointment_time })
     });
+
+    if(a.ok === true){
+        alert("Appointment details Added Successfully!!!")
+    }else{
+        alert("Failed to Add the Appointment details")
+    }
 
     document.getElementById('addAppointmentForm').reset()
     return
@@ -168,7 +181,7 @@ async function loadAppointments() {
         li.textContent = `Patient: ${appointment.patient_name} - Doctor: ${appointment.doctor_id} - Date: ${appointment.appointment_date} - Time: ${appointment.appointment_time}`;
         appointmentList.appendChild(li).appendChild(button)
         button.addEventListener("click" , async (e)=>{
-            await delete(appointment.id)
+            await deleteappointment(appointment.id)
             
         })
     });
@@ -183,49 +196,57 @@ document.getElementById('addbillingForm').addEventListener('submit', async funct
     const amount = document.getElementById('billingAmount').value;
     const date = document.getElementById('billingDate').value;
 
-    await fetch('http://localhost:4000/billing', {
+    let a = await fetch('http://localhost:4000/billing', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ patient_id, doctor_id, amount, date })
     });
+
+    if(a.ok === true){
+        alert("Billing details Added Successfully!!!")
+    }else{
+        alert("Failed to Add the Billing details")
+    }
 
     document.getElementById('addbillingForm').reset()
     return
 });
 let ap = false;
 
-
 document.getElementById("showbillingList").addEventListener('click', async () => {
     ap = !ap; // Toggle the state
 
-    const appointmentList = document.getElementById('billingList');
+    const billingList = document.getElementById('billingList');
     
     if (ap) {
-        await loadAppointments();  
-        appointmentList.style.display = 'block'; 
+        await loadbilling();  
+        billingList.style.display = 'block'; 
     } else {
-        appointmentList.innerHTML = ''; 
-        appointmentList.style.display = 'none'; 
+        billingList.innerHTML = ''; 
+        billingList.style.display = 'none'; 
     }
 });
 
 // Function to load all billing
 async function loadbilling() {
     const response = await fetch('http://localhost:4000/billing');
-    const billing = await response.json();
+    const billings = await response.json();
     const billingList = document.getElementById('billingList');
     billingList.innerHTML = '';
 
-    billing.forEach(billing => {
+    billings.forEach(billing => {
         const li = document.createElement('li');
-        const button = document.createElement('button')
-        button.innerHTML = "Delete"
-        li.textContent = `Patient: ${billing.patient_name} - Doctor: ${billing.doctor_id} - Date: ${billing.amount} - Time: ${billing.date}`;
-        appointmentList.appendChild(li).appendChild(button)
-        button.addEventListener("click" , async (e)=>{
-            await deletebilling(billing.id)
-            
-        })
+        li.textContent = `Patient: ${billing.patient_id} - Doctor: ${billing.doctor_id} - Amount: ${billing.amount} - Date: ${billing.date}`;
+        
+        const button = document.createElement('button');
+        button.innerHTML = "Delete";
+        button.addEventListener("click", async () => {
+            await deletebilling(billing.id);
+            await loadbilling(); // refresh list
+        });
+
+        li.appendChild(button);
+        billingList.appendChild(li);
     });
 }
 
@@ -243,11 +264,11 @@ async function deletePatient(patientId) {
             const result = await response.text();
             alert(result);  // e.g., "Patient deleted successfully"
         } else {
-            alert('Failed to delete patient');
+            alert('Failed to delete patient details');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error deleting patient');
+        alert('Error deleting patient details');
     }
 }
 
@@ -265,17 +286,17 @@ async function deletedoctor(doctorId) {
             const result = await response.text();
             alert(result);  // e.g., "Doctor deleted successfully"
         } else {
-            alert('Failed to delete doctor');
+            alert('Failed to delete doctor details');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error deleting doctor');
+        alert('Error deleting doctor details');
     }
 }
 
 async function deleteappointment(appointmentId) {
     try {
-        const response = await fetch(`http://localhost:4000/deletedoctor/${appointmentId}`, {
+        const response = await fetch(`http://localhost:4000/deleteappointment/${appointmentId}`, { // ✅ Fixed URL
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -283,23 +304,42 @@ async function deleteappointment(appointmentId) {
         });
 
         if (response.ok) {
-            await loadAppointments()
+            await loadAppointments();
             const result = await response.text();
-            alert(result);  // e.g., "Appointmetn deleted successfully"
+            alert(result);  // e.g., "Appointment deleted successfully"
         } else {
-            alert('Failed to delete appointmetn');
+            alert('Failed to delete appointment details');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error deleting appointment');
+        alert('Error deleting appointment details');
     }
 }
 
-// Load initial data
-// window.onload = function() {
-//     loadPatients();
-//     loadDoctors();
-//     loadAppointments();
-// };
 
+// Function to delete a billing record
+async function deletebilling(id) {
+    await fetch(`http://localhost:4000/billing/${id}`, {
+        method: 'DELETE'
+    });
+    try {
+        const response = await fetch(`http://localhost:4000/billing/${id}`, {
+        method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            await loadbilling()
+            const result = await response.text();
+            alert(result);  // e.g., "Appointmetn deleted successfully"
+        } else {
+            alert('Failed to delete billing details');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error deleting billing details');
+    }
+}
 
